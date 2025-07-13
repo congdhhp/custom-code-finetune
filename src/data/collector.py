@@ -115,16 +115,35 @@ class DataCollector:
             
             # Extract relevant files
             self._extract_files(clone_dir, files_dir, stats)
-            
-            # Clean up clone directory
-            shutil.rmtree(clone_dir)
+
+            # Clean up clone directory (handle Windows permission issues)
+            self._safe_cleanup(clone_dir)
             
         except Exception as e:
             self.logger.error(f"Error processing repository {repo_name}: {e}")
             stats["error"] = str(e)
         
         return stats
-    
+
+    def _safe_cleanup(self, directory: Path):
+        """
+        Safely clean up directory, handling Windows permission issues.
+
+        Args:
+            directory: Directory to clean up
+        """
+        try:
+            # Try normal removal first
+            shutil.rmtree(directory)
+            self.logger.debug(f"Successfully cleaned up {directory}")
+        except PermissionError as e:
+            # Handle Windows Git file permission issues
+            self.logger.warning(f"Permission denied cleaning up {directory}: {e}")
+            self.logger.info("Files extracted successfully, but cleanup failed (this is normal on Windows)")
+        except Exception as e:
+            # Handle other cleanup errors
+            self.logger.warning(f"Error during cleanup of {directory}: {e}")
+
     def _extract_files(self, source_dir: Path, target_dir: Path, stats: Dict[str, Any]):
         """
         Extract relevant files from cloned repository.

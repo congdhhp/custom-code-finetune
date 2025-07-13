@@ -45,15 +45,24 @@ processing:
     - "SWTBotMenu"
     - "SWTBotToolbarButton"
     - "SWTWorkbenchBot"
+    - "SWTBotTestCase"
+    - "bot.button"
+    - "bot.text"
+    - "bot.tree"
+    - "bot.menu"
+    - "bot.shell"
+    - ".click()"
+    - ".setText("
+    - ".select("
     - "@Test"
     - "junit"
     - "assertThat"
     - "assertEquals"
   
   # Code quality filters
-  min_lines_per_file: 10
+  min_lines_per_file: 5
   max_lines_per_file: 1000
-  min_swtbot_keywords: 2  # Minimum SWTBot-related keywords per file
+  min_swtbot_keywords: 1  # Minimum SWTBot-related keywords per file
   
   # Comment and documentation handling
   include_comments: true
@@ -89,8 +98,8 @@ dataset:
   quality_control:
     remove_duplicates: true
     similarity_threshold: 0.95
-    min_unique_tokens: 50
-    max_repetition_ratio: 0.3
+    min_unique_tokens: 20  # Reduced for smaller test files
+    max_repetition_ratio: 0.6  # More permissive for copyright headers
 
 # Output settings
 output:

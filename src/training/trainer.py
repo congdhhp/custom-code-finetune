@@ -191,14 +191,17 @@ class SWTBotTrainer:
         """Setup training callbacks."""
         callbacks = []
         
-        # Early stopping callback
-        if self.training_config.get("early_stopping_patience"):
+        # Early stopping callback (only if evaluation is enabled)
+        if (self.training_config.get("early_stopping_patience") and
+            self.training_args.evaluation_strategy != "no"):
             early_stopping = EarlyStoppingCallback(
                 early_stopping_patience=self.training_config["early_stopping_patience"],
                 early_stopping_threshold=self.training_config.get("early_stopping_threshold", 0.001)
             )
             callbacks.append(early_stopping)
             self.logger.info("Early stopping callback added")
+        elif self.training_config.get("early_stopping_patience"):
+            self.logger.warning("Early stopping disabled: evaluation strategy is 'no'")
         
         # Custom checkpoint callback
         checkpoint_callback = CheckpointCallback(
