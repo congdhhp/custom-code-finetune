@@ -1,0 +1,44 @@
+# Model Configuration for SWTBot Fine-tuning
+model:
+  name: "meta-llama/Llama-3.2-1B-Instruct"
+  trust_remote_code: true
+  use_cache: false  # Disable for gradient checkpointing
+  use_flash_attention_2: false
+
+# Quantization settings for 4GB VRAM
+quantization:
+  load_in_4bit: true
+  bnb_4bit_quant_type: "nf4"
+  bnb_4bit_compute_dtype: "bfloat16"
+  bnb_4bit_use_double_quant: true
+  load_in_8bit: false
+
+# LoRA configuration for parameter-efficient fine-tuning
+lora:
+  r: 8
+  alpha: 32
+  dropout: 0.0
+  bias: "none"
+  task_type: "CAUSAL_LM"
+  target_modules:
+    - "q_proj"
+    - "k_proj"
+    - "v_proj"
+    - "o_proj"
+    - "gate_proj"
+    - "up_proj"
+    - "down_proj"
+
+# Tokenizer settings
+tokenizer:
+  padding_side: "right"
+  truncation: true
+  max_length: 2048
+  add_special_tokens: true
+
+# Memory optimization
+memory:
+  gradient_checkpointing: true
+  dataloader_pin_memory: true
+  dataloader_num_workers: 4
+  device_map: "auto"

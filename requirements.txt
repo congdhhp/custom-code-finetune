@@ -1,0 +1,52 @@
+# Core ML libraries (PyTorch installed separately by setup script)
+transformers>=4.36.0
+datasets>=2.14.0
+tokenizers>=0.15.0
+accelerate>=0.24.0
+
+# Parameter-efficient fine-tuning
+peft>=0.7.0
+bitsandbytes>=0.41.0
+
+# Attention optimization (optional, may fail on some systems)
+# flash-attn>=2.3.0
+
+# Data processing
+numpy>=1.24.0
+pandas>=2.0.0
+tqdm>=4.65.0
+
+# Configuration management
+pyyaml>=6.0
+omegaconf>=2.3.0
+
+# Logging and monitoring
+wandb>=0.16.0
+tensorboard>=2.14.0
+
+# Git operations for data collection
+gitpython>=3.1.0
+requests>=2.31.0
+
+# Code analysis and processing
+tree-sitter>=0.20.0
+tree-sitter-java>=0.20.0
+
+# Utilities
+click>=8.1.0
+rich>=13.0.0
+pathlib2>=2.3.0
+
+# Development tools
+pytest>=7.4.0
+black>=23.0.0
+flake8>=6.0.0
+mypy>=1.5.0
+
+# Jupyter for experimentation
+jupyter>=1.0.0
+ipywidgets>=8.0.0
+
+# Memory profiling
+psutil>=5.9.0
+py3nvml>=0.2.7

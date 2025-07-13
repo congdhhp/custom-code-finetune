@@ -1,0 +1,81 @@
+# Training Configuration for SWTBot Fine-tuning
+training:
+  # Basic training parameters
+  max_steps: 2000
+  num_train_epochs: 3
+  per_device_train_batch_size: 2  # Small batch size for 4GB VRAM
+  per_device_eval_batch_size: 2
+  gradient_accumulation_steps: 8  # Effective batch size = 2 * 8 = 16
+  
+  # Learning rate and scheduling
+  learning_rate: 0.0005
+  lr_scheduler_type: "cosine"
+  warmup_steps: 100
+  weight_decay: 0.01
+  
+  # Mixed precision training
+  fp16: false
+  bf16: true  # Better for training stability
+  
+  # Evaluation and saving
+  evaluation_strategy: "steps"
+  eval_steps: 200
+  save_strategy: "steps"
+  save_steps: 200  # Save every 200 steps instead of only at the end
+  save_total_limit: 5  # Keep only 5 most recent checkpoints
+  load_best_model_at_end: true
+  metric_for_best_model: "eval_loss"
+  greater_is_better: false
+  
+  # Logging
+  logging_strategy: "steps"
+  logging_steps: 50
+  report_to: ["tensorboard", "wandb"]
+  
+  # Data handling
+  dataloader_drop_last: true
+  dataloader_num_workers: 4
+  
+  # Optimization
+  optim: "adamw_torch"
+  adam_beta1: 0.9
+  adam_beta2: 0.999
+  adam_epsilon: 0.00000001
+  max_grad_norm: 1.0
+  
+  # Reproducibility
+  seed: 42
+  data_seed: 42
+  
+  # Output
+  output_dir: "models/checkpoints"
+  overwrite_output_dir: true
+  
+  # Early stopping
+  early_stopping_patience: 3
+  early_stopping_threshold: 0.001
+
+# Sequence and data parameters
+data:
+  seq_length: 2048
+  fim_rate: 0.5  # Fill-in-the-middle transformation rate
+  fim_spm_rate: 0.5  # SPM variant rate for FIM
+  chars_per_token: 2.5  # Estimated for Java code
+  num_of_sequences: 1024  # Buffer size for constant length dataset
+  
+# Validation split
+validation:
+  validation_split: 0.1
+  validation_examples: 4000
+
+# Checkpointing
+checkpointing:
+  save_on_each_node: false
+  resume_from_checkpoint: null  # Set to checkpoint path to resume
+  
+# Monitoring
+monitoring:
+  include_tokens_per_second: true
+  include_num_input_tokens_seen: true
+  log_level: "info"
+  disable_tqdm: false

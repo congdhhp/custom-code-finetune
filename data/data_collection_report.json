@@ -1,0 +1,54 @@
+{
+  "collection_summary": {
+    "repositories_processed": 2,
+    "files_collected": 868,
+    "total_size_mb": 4.011165618896484,
+    "repositories": {
+      "swtbot-main": {
+        "url": "https://github.com/eclipse-swtbot/org.eclipse.swtbot",
+        "branch": "master",
+        "files_collected": 858,
+        "size_mb": 3.9778499603271484,
+        "file_types": {
+          ".java": 854,
+          ".md": 4
+        },
+        "error": "[WinError 5] Access is denied: 'data\\\\raw\\\\swtbot-main\\\\clone\\\\.git\\\\objects\\\\pack\\\\pack-3f546774cf5ea2c0e08ffc893523289205ae32ad.idx'"
+      },
+      "swtbot-examples": {
+        "url": "https://github.com/caniszczyk/swtbot-examples",
+        "branch": "master",
+        "files_collected": 10,
+        "size_mb": 0.03331565856933594,
+        "file_types": {
+          ".java": 10
+        },
+        "error": "[WinError 5] Access is denied: 'data\\\\raw\\\\swtbot-examples\\\\clone\\\\.git\\\\objects\\\\pack\\\\pack-21256ab5c86b5768ca7b1aab148db4d1f90eb10c.idx'"
+      }
+    }
+  },
+  "processing_summary": {
+    "files_processed": 864,
+    "files_accepted": 0,
+    "files_rejected": 863,
+    "rejection_reasons": {
+      "insufficient_swtbot_keywords": 620,
+      "excessive_repetition": 236,
+      "too_many_lines": 7
+    },
+    "total_lines": 23,
+    "total_characters": 765
+  },
+  "file_statistics": {
+    "total_files": 1,
+    "total_lines": 23,
+    "total_characters": 765,
+    "avg_lines_per_file": 23.0,
+    "avg_chars_per_file": 765.0,
+    "swtbot_keyword_distribution": {
+      "SWTBot": 1,
+      "@Test": 1,
+      "junit": 1
+    }
+  }
+}

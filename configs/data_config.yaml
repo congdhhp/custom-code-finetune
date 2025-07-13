@@ -1,0 +1,115 @@
+# Data Configuration for SWTBot Fine-tuning
+data_sources:
+  repositories:
+    - url: "https://github.com/eclipse-swtbot/org.eclipse.swtbot"
+      name: "swtbot-main"
+      branch: "master"
+      description: "Main SWTBot repository"
+    - url: "https://github.com/caniszczyk/swtbot-examples"
+      name: "swtbot-examples"
+      branch: "master"
+      description: "SWTBot examples repository"
+
+# Data collection settings
+collection:
+  clone_depth: 1  # Shallow clone for faster download
+  include_patterns:
+    - "**/*.java"
+    - "**/*.md"  # For documentation context
+  exclude_patterns:
+    - "**/target/**"
+    - "**/bin/**"
+    - "**/build/**"
+    - "**/.git/**"
+    - "**/node_modules/**"
+    - "**/*.class"
+    - "**/*.jar"
+    - "**/*.war"
+  
+  # File size limits
+  max_file_size_mb: 1
+  min_file_size_bytes: 100
+
+# Java code processing
+processing:
+  # SWTBot-specific filtering
+  swtbot_keywords:
+    - "SWTBot"
+    - "SWTBotView"
+    - "SWTBotEditor"
+    - "SWTBotShell"
+    - "SWTBotButton"
+    - "SWTBotText"
+    - "SWTBotTree"
+    - "SWTBotTable"
+    - "SWTBotMenu"
+    - "SWTBotToolbarButton"
+    - "SWTWorkbenchBot"
+    - "@Test"
+    - "junit"
+    - "assertThat"
+    - "assertEquals"
+  
+  # Code quality filters
+  min_lines_per_file: 10
+  max_lines_per_file: 1000
+  min_swtbot_keywords: 2  # Minimum SWTBot-related keywords per file
+  
+  # Comment and documentation handling
+  include_comments: true
+  include_javadoc: true
+  preserve_imports: true
+  
+  # Code formatting
+  normalize_whitespace: true
+  remove_empty_lines: false
+  preserve_indentation: true
+
+# Dataset preparation
+dataset:
+  # Train/validation split
+  train_split: 0.9
+  validation_split: 0.1
+  
+  # Tokenization
+  seq_length: 2048
+  max_sequence_length: 2048
+  overlap_size: 128  # Overlap between chunks
+  
+  # Data augmentation
+  augmentation:
+    enabled: true
+    methods:
+      - "variable_renaming"  # Rename variables to generic names
+      - "comment_removal"    # Remove some comments randomly
+      - "import_shuffling"   # Shuffle import statements
+    augmentation_rate: 0.2
+  
+  # Quality control
+  quality_control:
+    remove_duplicates: true
+    similarity_threshold: 0.95
+    min_unique_tokens: 50
+    max_repetition_ratio: 0.3
+
+# Output settings
+output:
+  raw_data_dir: "data/raw"
+  processed_data_dir: "data/processed"
+  dataset_dir: "data/datasets"
+  
+  # File formats
+  save_format: "jsonl"  # JSON Lines format
+  compression: "gzip"
+  
+  # Metadata
+  save_metadata: true
+  include_file_paths: true
+  include_repository_info: true
+
+# Caching
+cache:
+  enabled: true
+  cache_dir: "data/.cache"
+  cache_processed_files: true
+  cache_tokenized_data: true

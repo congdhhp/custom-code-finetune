@@ -1,0 +1,25 @@
+Create a SWTBot test for clicking a button with text 'Submit'
+Test opening a file dialog and selecting a file
+Create a test that verifies text input in a form field
+Test selecting an item from a dropdown menu
+Create a SWTBot test for expanding a tree node
+Test double-clicking on a table row
+Create a test that verifies menu item functionality
+Test typing text into a text editor widget
+Create a SWTBot test for closing a dialog window
+Test right-clicking to open a context menu
+Create a test that verifies checkbox state changes
+Test navigating between tabs in a tab folder
+Create a SWTBot test for toolbar button functionality
+Test drag and drop operations between widgets
+Create a test that verifies label text updates
+Test opening and closing a view in Eclipse
+Create a SWTBot test for keyboard shortcuts
+Test filtering items in a table or list
+Create a test that verifies progress bar updates
+Test switching between different perspectives
+Create a SWTBot test for wizard navigation
+Test copying and pasting text content
+Create a test that verifies tooltip text display
+Test resizing windows and dialog boxes
+Create a SWTBot test for multi-selection in lists
